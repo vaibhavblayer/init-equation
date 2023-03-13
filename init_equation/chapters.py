@@ -3,7 +3,8 @@ modules = [
         'mechanics',
         'electrodynamics',
         'modern-physics',
-        'optics'
+        'optics',
+        'vectors'
         ]
 
 chapters_mechanics = [
@@ -41,8 +42,12 @@ chapters_modern_physics = [
         'communiation-system'
         ]
 
-chapters = [chapters_mechanics, chapters_electrodynamics, chapters_modern_physics, chapters_optics]
+chapters_vectors = [
+        'vector-analysis'
+        ]
 
-chapters_list = chapters_mechanics + chapters_electrodynamics + chapters_modern_physics + chapters_optics
+chapters = [chapters_mechanics, chapters_electrodynamics, chapters_modern_physics, chapters_optics, chapters_vectors]
+
+chapters_list = chapters_mechanics + chapters_electrodynamics + chapters_modern_physics + chapters_optics + chapters_vectors
 
 

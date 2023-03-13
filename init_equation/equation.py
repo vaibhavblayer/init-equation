@@ -30,6 +30,9 @@ class Equation:
             return f'{self.parent_path}/{modules[2]}/{self.chapter}/equations'
         elif self.chapter in chapters[3]:
             return f'{self.parent_path}/{modules[3]}/{self.chapter}/equations'
+        elif self.chapter in chapters[4]:
+            return f'{self.parent_path}/{modules[4]}/{self.chapter}/equations'
+
 
 
 
