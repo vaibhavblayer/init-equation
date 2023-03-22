@@ -55,7 +55,16 @@ CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
         prompt=True,
         help="flag (-a turns-on) appends the equation to database"
         )
-def main(chapter, size, equation_number, append_to_database):
+@click.option(
+        '-c',
+        '--copy',
+        is_flag=True,
+        prompt=True,
+        default=False,
+        show_default=True,
+        help="If true copies the previous main.tex file"
+        )
+def main(chapter, size, equation_number, append_to_database, copy):
     equation = Equation(chapter, path_parent)
     if append_to_database:
         try:
@@ -71,29 +80,37 @@ def main(chapter, size, equation_number, append_to_database):
             f'equation-{equation_number:02}'
             )
 
+    path_equation_to_copy_from = os.path.join(
+            equation.path_equation(),
+            f'equation-{equation_number-1:02}'
+            )
 
     os.makedirs(path_equation, exist_ok=True)
     main_tex = os.path.join(path_equation, 'main.tex')
-    with open(main_tex, 'w') as file:
-        file.write(f'\\documentclass{{article}}\n')
-        file.write(f'\\usepackage{{v-equation}}\n')
-        if size == 'square':
-            file.write(size_square)
-        elif size == 'h-rectangle':
-            file.write(size_h_rectangle)
-        elif size == 'v-rectangle':
-            file.write(size_v_rectangle)
-
-        file.write(f'\\begin{{document}}\n')
-        file.write(f'{equation_number}\n')
-        file.write(f'\\end{{document}}\n')
-
-
-    os.system(f'bat {main_tex}')
-    time.sleep(1)
-    os.system(f'open -a texmaker {main_tex}')
-    print('\n\topening texmaker ...\n')
-    time.sleep(1)
-
-
-
+    
+    if copy:
+        os.system(f'cp {path_equation_to_copy_from}/main.tex {path_equation}/main.tex')
+    else:
+	    with open(main_tex, 'w') as file:
+	        file.write(f'\\documentclass{{article}}\n')
+	        file.write(f'\\usepackage{{v-equation}}\n')
+	        if size == 'square':
+	            file.write(size_square)
+	        elif size == 'h-rectangle':
+	            file.write(size_h_rectangle)
+	        elif size == 'v-rectangle':
+	            file.write(size_v_rectangle)
+	
+	        file.write(f'\\begin{{document}}\n')
+	        file.write(f'{equation_number}\n')
+	        file.write(f'\\end{{document}}\n')
+	
+	
+	os.system(f'bat {main_tex}')
+	time.sleep(1)
+	os.system(f'open -a texmaker {main_tex}')
+	print('\n\topening texmaker ...\n')
+	time.sleep(1)
+	
+	
+	
