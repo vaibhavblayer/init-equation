@@ -100,17 +100,15 @@ def main(chapter, size, equation_number, append_to_database, copy):
 	            file.write(size_h_rectangle)
 	        elif size == 'v-rectangle':
 	            file.write(size_v_rectangle)
-	
+
 	        file.write(f'\\begin{{document}}\n')
 	        file.write(f'{equation_number}\n')
 	        file.write(f'\\end{{document}}\n')
-	
-	
-	os.system(f'bat {main_tex}')
-	time.sleep(1)
-	os.system(f'open -a texmaker {main_tex}')
-	print('\n\topening texmaker ...\n')
-	time.sleep(1)
-	
-	
-	
+
+
+
+    os.system(f'bat {main_tex}')
+    time.sleep(1)
+    os.system(f'open -a texmaker {main_tex}')
+    print('\n\topening texmaker ...\n')
+    time.sleep(1)
