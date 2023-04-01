@@ -12,9 +12,9 @@ path_parent = os.environ["TEX_PARENT_PATH"]
 eqn_number_without_database = f'{int(time.strftime("%H%M%S%d%m%Y")):14}'
 
 
-size_square = f'\\geometry{{\npaperwidth=5in, \npaperheight=5in, \ntop=15mm, \nbottom=15mm, \nleft=10mm, \nright=10mm\n}}\n\n'
-size_h_rectangle = f'\\geometry{{\npaperwidth=8in, \npaperheight=4.5in, \ntop=15mm, \nbottom=15mm, \nleft=10mm, \nright=10mm\n}}\n\n'
-size_v_rectangle = f'\\geometry{{\npaperwidth=4.5in, \npaperheight=8in, \ntop=15mm, \nbottom=15mm, \nleft=10mm, \nright=10mm\n}}\n\n'
+size_square = f'\\vgeometry\n\n'
+size_h_rectangle = f'\\vgeometry[8][4.5][15][15][10][10]\n\n'
+size_v_rectangle = f'\\vgeometry[4.5][8][15][15][10][10]\n\n'
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -87,6 +87,8 @@ def main(chapter, size, equation_number, append_to_database, copy):
 
     os.makedirs(path_equation, exist_ok=True)
     main_tex = os.path.join(path_equation, 'main.tex')
+    download_dir = os.path.join(path_equation, 'downloads')
+    os.makedirs(download_dir, exist_ok=True)
     
     if copy:
         os.system(f'cp {path_equation_to_copy_from}/main.tex {path_equation}/main.tex')
@@ -102,7 +104,17 @@ def main(chapter, size, equation_number, append_to_database, copy):
 	            file.write(size_v_rectangle)
 
 	        file.write(f'\\begin{{document}}\n')
-	        file.write(f'{equation_number}\n')
+	        file.write(f'\\vtitle[title]\n')
+            file.write(f'\\begin{{center}}\n')
+            file.write(f'\\begin{{tikzpicture}}\n')
+            file.write(f'\\tzdot*(0, 0)\n')
+            file.write(f'\\end{{tikzpicture}}\n')
+            file.write(f'\\end{{center}}\n')
+            file.write(f'\\vspace*{{\\fill}}')
+            file.write(f'\\begin{{align*}}\n')
+            file.write(f'\\int x dx\n')
+            file.write(f'\\end{{align*}}\n')
+            file.write(f'\\vspace*{{\\fill}}')
 	        file.write(f'\\end{{document}}\n')
 
 
