@@ -89,33 +89,33 @@ def main(chapter, size, equation_number, append_to_database, copy):
     main_tex = os.path.join(path_equation, 'main.tex')
     download_dir = os.path.join(path_equation, 'downloads')
     os.makedirs(download_dir, exist_ok=True)
-    
+
     if copy:
         os.system(f'cp {path_equation_to_copy_from}/main.tex {path_equation}/main.tex')
     else:
-	    with open(main_tex, 'w') as file:
-	        file.write(f'\\documentclass{{article}}\n')
-	        file.write(f'\\usepackage{{v-equation}}\n')
-	        if size == 'square':
-	            file.write(size_square)
-	        elif size == 'h-rectangle':
-	            file.write(size_h_rectangle)
-	        elif size == 'v-rectangle':
-	            file.write(size_v_rectangle)
+        with open(main_tex, 'w') as file:
+            file.write(f'\\documentclass{{article}}\n')
+            file.write(f'\\usepackage{{v-equation}}\n')
+            if size == 'square':
+                file.write(size_square)
+            elif size == 'h-rectangle':
+                file.write(size_h_rectangle)
+            elif size == 'v-rectangle':
+                file.write(size_v_rectangle)
 
-	        file.write(f'\\begin{{document}}\n')
-	        file.write(f'\\vtitle[title]\n')
+            file.write(f'\\begin{{document}}\n')
+            file.write(f'\\vtitle[title]\n')
             file.write(f'\\begin{{center}}\n')
             file.write(f'\\begin{{tikzpicture}}\n')
             file.write(f'\\tzdot*(0, 0)\n')
             file.write(f'\\end{{tikzpicture}}\n')
             file.write(f'\\end{{center}}\n')
-            file.write(f'\\vspace*{{\\fill}}')
+            file.write(f'\\vspace*{{\\fill}}\n')
             file.write(f'\\begin{{align*}}\n')
             file.write(f'\\int x dx\n')
             file.write(f'\\end{{align*}}\n')
-            file.write(f'\\vspace*{{\\fill}}')
-	        file.write(f'\\end{{document}}\n')
+            file.write(f'\\vspace*{{\\fill}}\n')
+            file.write(f'\\end{{document}}\n')
 
 
 
