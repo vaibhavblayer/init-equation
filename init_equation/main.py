@@ -11,6 +11,19 @@ path_parent = os.environ["TEX_PARENT_PATH"]
 
 eqn_number_without_database = f'{int(time.strftime("%H%M%S%d%m%Y")):14}'
 
+link = r"""
+\def\gdrive{Link}
+"""
+
+qrcode = r"""
+\pagebreak
+
+\vspace*{\fill}
+\begin{center}
+    \fbox{\qrcode[height=2cm]{\gdrive}}
+\end{center}
+\vspace*{\fill}
+"""
 
 size_square = f'\\vgeometry\n\n'
 size_h_rectangle = f'\\vgeometry[8][4.5][15][15][10][10]\n\n'
@@ -104,6 +117,7 @@ def main(chapter, size, equation_number, append_to_database, copy):
                 file.write(size_v_rectangle)
 
             file.write(f'\\begin{{document}}\n')
+            file.write(link)
             file.write(f'\\vtitle[title]\n')
             file.write(f'\\begin{{center}}\n')
             file.write(f'\\begin{{tikzpicture}}\n')
@@ -115,6 +129,7 @@ def main(chapter, size, equation_number, append_to_database, copy):
             file.write(f'\\int x dx\n')
             file.write(f'\\end{{align*}}\n')
             file.write(f'\\vspace*{{\\fill}}\n')
+            file.write(qrcode)
             file.write(f'\\end{{document}}\n')
 
 
